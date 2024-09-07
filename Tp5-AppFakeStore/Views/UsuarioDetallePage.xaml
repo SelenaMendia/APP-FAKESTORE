@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tp5_AppFakeStore.Views.UsuarioDetallePage"
+             xmlns:vm="clr-namespace:Tp5_AppFakeStore.ViewModels"
+             xmlns:models="clr-namespace:Tp5_AppFakeStore.Models"
+             x:DataType="vm:UsuarioDetalleViewModel"
+             Title="{Binding Title}"
+             BackgroundColor="Black">
+
+    <ScrollView>
+        <VerticalStackLayout Margin="10">
+
+            <Grid ColumnDefinitions=".3*,.6*" RowDefinitions="*,*,*,*,*,*,*" ColumnSpacing="0" BackgroundColor="White" Padding="10">
+
+                <Image 
+                Source="user.jpg" 
+                HeightRequest="160"
+                WidthRequest="160"
+                Grid.Column="0" 
+                Grid.ColumnSpan="2"
+                Grid.Row="0"
+                BackgroundColor="White"/>
+
+                <Entry Text="{Binding Usuario.name.FullName}" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center" FontSize="20"/>
+
+                <Label 
+            Text="Telefono" 
+            Grid.Column="0" 
+            Grid.Row="2" VerticalOptions="Center"
+            TextColor="Black"
+            FontAttributes="Bold"/>
+                
+                <Entry 
+            Text="{Binding Usuario.Phone}" 
+            Grid.Column="1" 
+            Grid.Row="2" 
+            TextColor="Black"
+            BackgroundColor="AliceBlue"/>
+
+                <Label 
+            Text="Correo" 
+            Grid.Column="0" 
+            Grid.Row="3" VerticalOptions="Center"
+            TextColor="Black"
+            FontAttributes="Bold"/>
+                
+                <Entry 
+            Text="{Binding Usuario.email}" 
+            Grid.Column="1" 
+            Grid.Row="3" 
+            TextColor="Black"
+            BackgroundColor="AliceBlue"/>
+
+                <Label 
+            Text="Dirreccion" 
+            Grid.Column="0" 
+            Grid.Row="4" 
+            VerticalOptions="Center"
+            TextColor="Black"
+            FontAttributes="Bold"/>
+                
+                <Entry 
+            Text="{Binding Usuario.address.FullAddress}" 
+            Grid.Column="1" 
+            Grid.Row="4" 
+            TextColor="Black"
+            BackgroundColor="AliceBlue"/>
+
+
+                <Label 
+            Text="Nombre Usuario" 
+            Grid.Column="0" 
+            Grid.Row="5" 
+            VerticalOptions="Center"
+            TextColor="Black"
+            FontAttributes="Bold"/>
+
+                <Entry 
+            Text="{Binding Usuario.Username}" 
+            Grid.Column="1" 
+            Grid.Row="5" 
+            TextColor="Black"
+            BackgroundColor="AliceBlue"/>
+
+                <Label 
+            Text="Contraseña" 
+            Grid.Column="0" 
+            Grid.Row="6" 
+            VerticalOptions="Center"
+            TextColor="Black"
+            FontAttributes="Bold"/>
+
+                <Entry 
+            Text="{Binding Usuario.Password}" 
+            Grid.Column="1" 
+            Grid.Row="6" 
+            TextColor="Black"
+            BackgroundColor="AliceBlue"/>
+
+            </Grid>
+
+            <Button 
+        Text="Volver a Lista" 
+        Margin="0,10" 
+        Command="{Binding GoBackCommand}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

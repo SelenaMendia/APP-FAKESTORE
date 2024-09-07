@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tp5_AppFakeStore.Views.ProductoDetallePage"
+             xmlns:vm="clr-namespace:Tp5_AppFakeStore.ViewModels"
+             xmlns:models="clr-namespace:Tp5_AppFakeStore.Models"
+             x:DataType="vm:ProductoDetalleViewModel"
+             Title="{Binding Title}"
+             BackgroundColor="Black">
+
+    <ScrollView>
+    <VerticalStackLayout Margin="10">
+
+            <Grid ColumnDefinitions=".3*,.7*" RowDefinitions="*,*,*,*,*,*" ColumnSpacing="0" BackgroundColor="White" Padding="10">
+
+                <Label Text="Nombre" Grid.Column="0" Grid.Row="0" VerticalOptions="Center" TextColor="Black" FontAttributes="Bold" />
+                <Entry Text="{Binding Producto.title}" Grid.Column="1" Grid.Row="0" TextColor="Black" BackgroundColor="AliceBlue" FontAttributes="Bold"/>
+
+            <Label 
+                Text="Descripción" 
+                Grid.Column="0" 
+                Grid.Row="1" 
+                VerticalOptions="Center"
+                TextColor="Black"
+                FontAttributes="Bold" />
+            
+            <Editor 
+                Text="{Binding Producto.description}" 
+                MaxLength="1000" 
+                Grid.Column="1" 
+                Grid.Row="1" 
+                TextColor="Black"
+                BackgroundColor="AliceBlue"/>
+
+            <Label 
+                Text="Precio" 
+                Grid.Column="0" 
+                Grid.Row="2" VerticalOptions="Center"
+                TextColor="Black"
+                FontAttributes="Bold"/>
+            <Entry 
+                Text="{Binding Producto.price}" 
+                Grid.Column="1" 
+                Grid.Row="2" 
+                TextColor="Black"
+                BackgroundColor="AliceBlue"/>
+
+            <Label 
+                Text="Categoria" 
+                Grid.Column="0" 
+                Grid.Row="3" 
+                VerticalOptions="Center"
+                TextColor="Black"
+                FontAttributes="Bold"/>
+            <Entry 
+                Text="{Binding Producto.Categoria}" 
+                Grid.Column="1" 
+                Grid.Row="3" 
+                TextColor="Black"
+                BackgroundColor="AliceBlue"/>
+
+            <Label 
+                VerticalOptions="Center" 
+                Text="{x:Static models:MaterialIcons.Star}" 
+                FontSize="25" 
+                TextColor="Gold" 
+                FontFamily="MaterialDesignIcons" 
+                Grid.Column="0" 
+                Grid.Row="4" 
+                FontAttributes="Bold"/>
+            
+            <Entry 
+                Text="{Binding Producto.rating.rate}" 
+                Grid.Column="1" 
+                Grid.Row="4" 
+                TextColor="Black"
+                BackgroundColor="AliceBlue"/>
+
+            <Image 
+                Source="{Binding Producto.image}" 
+                HeightRequest="200" 
+                Grid.ColumnSpan="2"
+                Grid.Row="5"
+                BackgroundColor="White"/>
+
+        </Grid>
+        
+        <Button 
+            Text="Volver a Lista" 
+            Margin="0,10" 
+            Command="{Binding GoBackCommand}"/>
+        
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tp5_AppFakeStore.Views.UsuarioListaPage"
+             xmlns:vm="clr-namespace:Tp5_AppFakeStore.ViewModels"
+             xmlns:model="clr-namespace:Tp5_AppFakeStore.Models"
+             x:DataType="vm:UsuarioViewModel"
+             Title="Lista de Usuarios">
+    
+    
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*,Auto" RowSpacing="0">
+
+        <StackLayout Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" />
+            <Label Text="Espere..." TextColor="Gray" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <RefreshView Grid.ColumnSpan="2" Command="{Binding GetUsersCommand}" IsRefreshing="{Binding IsRefreshing}">
+
+            <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Usuarios}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding UsuarioSeleccionado}"
+                        SelectionChangedCommand="{Binding GoToDetailCommand}">
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="100">
+                        <Image Source="not_found.jpg" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate x:DataType="model:Usuario">
+
+                        <Frame
+                            Margin="10"
+                            Padding="10"
+                            BorderColor="Black"
+                            HasShadow="False"
+                            CornerRadius="10"
+                            BackgroundColor="White">
+
+                            <Grid
+                            ColumnDefinitions=".3*,.6*"
+                            Margin="1" 
+                            ColumnSpacing="5" 
+                            RowSpacing="1" 
+                            RowDefinitions="*,*,*,*"
+                            >
+
+
+                                <!-- Imagen del usuario -->
+                                <Image Grid.Column="0"
+                               Source="user.jpg"
+                                       Margin="0"
+                               WidthRequest="1000"
+                               HeightRequest="80"
+                               Aspect="AspectFit"/>
+
+                                <!-- Nombre del usuario -->
+                                <Label Grid.Column="1" 
+                               Text="{Binding name.FullName}"
+                               VerticalOptions="Center"
+                               TextColor="#000"
+                               FontSize="25"
+                                 />
+
+                                <!-- Teléfono del usuario con ícono -->
+
+                                <HorizontalStackLayout Grid.Column="1" 
+                                Grid.Row="1"
+                                VerticalOptions="Center"
+                                Spacing="5">
+                                    <!-- Ícono del teléfono -->
+                                    <Image Source="phone_icon.png" 
+                                    WidthRequest="20" 
+                                    HeightRequest="20"
+                                    VerticalOptions="Center"/>
+
+                                    <!-- Teléfono del usuario -->
+                                    <Label Text="{Binding Phone}" 
+                                    VerticalOptions="Center"
+                                    TextColor="#000"
+                                    FontSize="Small"/>
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout Grid.Column="1"
+                                                       Grid.Row="2"
+                                VerticalOptions="Center"
+                                Spacing="5">
+                                    <!-- Ícono del teléfono -->
+                                    <Image Source="correo.png" 
+                                WidthRequest="20" 
+                                HeightRequest="20"
+                                VerticalOptions="Center"
+                                />
+
+                                    <Label Text="{Binding email}"
+                                VerticalOptions="Center"
+                                TextColor="#000"
+                                FontSize="Small"
+                                />
+                                </HorizontalStackLayout>
+                                
+                                    
+                                <Label Grid.Column="1"
+                                Grid.Row="8"
+                                
+                                Text="Más Info..."
+                                HorizontalOptions="Center"
+                                VerticalOptions="End"
+                                TextColor="#102040"
+                                FontSize="Small"/>
+                                
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

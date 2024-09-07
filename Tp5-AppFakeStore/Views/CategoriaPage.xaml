@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tp5_AppFakeStore.Views.CategoriaPage"
+             xmlns:vm="clr-namespace:Tp5_AppFakeStore.ViewModels"
+             x:DataType="vm:CategoriaViewModel"
+             Title="Categorías: ">
+
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*,Auto" RowSpacing="0" Margin="2">
+
+        <StackLayout Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" >
+            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            <Label Text="Espere..." TextColor="Gray" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <RefreshView Grid.ColumnSpan="2" Command="{Binding GetCategoriasCommand}" IsRefreshing="{Binding IsRefreshing}">
+
+            <CollectionView Grid.Row="1"
+                     ItemsSource="{Binding Categorias}"
+                     SelectionMode="Single"
+                     
+                     >
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="100">
+                        <Image Source="not_found.jpg" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate >
+
+                        <Frame
+                         Margin="10"
+                         Padding="10"
+                         BorderColor="Black"
+                         HasShadow="False"
+                         CornerRadius="10"
+                         
+                            BackgroundColor="PaleVioletRed">
+
+                            
+
+                            <Grid
+                         
+                         ColumnDefinitions=".3*,.6*"
+                         Margin="1" 
+                         ColumnSpacing="10" 
+                         RowSpacing="2" 
+                         RowDefinitions="*,*,*,*"
+                         >
+
+                                
+                        <Label Grid.Column="0" 
+                        Text="{Binding Categorias}"
+                        VerticalOptions="Center"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="Medium"/>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Tp5_AppFakeStore.ViewModels"
+             x:DataType="vm:LoginViewModel"
+             x:Class="Tp5_AppFakeStore.Views.Login"
+             >
+
+    <Grid>
+        <!-- Imagen de fondo -->
+        <Image Source="fondovioleta.png"
+               Aspect="AspectFill"
+               Opacity="0.3" 
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"/>
+        <Label Text="Fake Store API" FontSize="32" HorizontalOptions="Center" Margin="80" TextColor="Violet"/>
+
+        <StackLayout Padding="40" VerticalOptions="Center">
+        <Label Text="Bienvenid@s" FontSize="32" HorizontalOptions="Center" Padding="30"/>
+
+        <Entry Placeholder="Usuario"
+               Text="{Binding Username}" TextColor="White"/>
+
+        <Entry Placeholder="Contraseña"
+               IsPassword="True"
+               Text="{Binding Password}" TextColor="White"
+               Margin="0,10,0,30"/>
+
+        <Button Text="Iniciar Sesion"
+                Command="{Binding LoginCommand}"  />
+
+        <!-- Indicador de carga -->
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+
+        <Label Text="{Binding LoginMessage}" TextColor="Red" HorizontalOptions="Center" />
+    </StackLayout>
+    </Grid>
+</ContentPage>

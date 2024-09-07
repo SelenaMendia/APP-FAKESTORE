@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tp5_AppFakeStore.Views.ProductoListaPage"
+             xmlns:vm="clr-namespace:Tp5_AppFakeStore.ViewModels"
+             xmlns:model="clr-namespace:Tp5_AppFakeStore.Models"
+             x:DataType="vm:ProductoListaViewModel"
+             Title="{Binding Title}">
+    
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*,Auto" RowSpacing="0" Margin="2">
+
+        <StackLayout Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" >
+            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            <Label Text="Espere..." TextColor="Gray" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <RefreshView Grid.ColumnSpan="2" Command="{Binding GetProductosCommand}" IsRefreshing="{Binding IsRefreshing}">
+
+            <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Productos}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding ProductoSeleccionado}"
+                        SelectionChangedCommand="{Binding GoToDetailCommand}">
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="100">
+                        <Image Source="not_found.jpg" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    
+                    <DataTemplate x:DataType="model:Producto">
+
+                        <Frame
+                            Margin="10"
+                            Padding="10"
+                            BorderColor="Black"
+                            HasShadow="False"
+                            CornerRadius="10"
+                            BackgroundColor="White">
+
+                            <Grid
+                            
+                            ColumnDefinitions=".3*,.6*"
+                            Margin="1" 
+                            ColumnSpacing="10" 
+                            RowSpacing="2" 
+                            RowDefinitions="*,*,*,*"
+                            >
+
+                            <Image Grid.Column="0"
+                               Source="{Binding image}"
+                               WidthRequest="100"
+                               HeightRequest="80"
+                               Aspect="AspectFit"/>
+
+                            <Label Grid.Column="1" 
+                               Text="{Binding title}"
+                               VerticalOptions="Center"
+                               TextColor="Black"
+                               FontSize="Small"/>
+
+                                <Label Grid.Column="1" 
+                               Grid.Row="1"
+                               Text="{Binding price, StringFormat='${0:F2}'}"
+                               VerticalOptions="Center"
+                               TextColor="DarkGreen"
+                               FontSize="Small"/>
+
+                                <!-- Texto "Ver detalle" -->
+                            <Label Grid.Column="1"
+                                Grid.Row="3"
+                                Text="Ver detalle"
+                                HorizontalOptions="Center"
+                                VerticalOptions="End"
+                                TextColor="#102040"
+                                FontSize="Small"/>
+
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
